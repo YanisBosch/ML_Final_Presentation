@@ -5,3 +5,9 @@ explain
 -what are the usual disadvantages
 -why we still did listwise deletion
 -how we went about doing it
+
+model evaluation:
+-accuracy
+-speed
+-generality
+-flexibility
