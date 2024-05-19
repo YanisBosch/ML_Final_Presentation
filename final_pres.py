@@ -45,7 +45,6 @@ df[header[-1]].astype(float)
 #First idea: See which columns contain the most missing values, if one column is almost empty we may exclude it
 
 num_NaN = df.isna().sum().sort_values(ascending = False)
-#print(num_NaN[num_NaN >= 1])
 
 #Many columns are almost empty -> idea: remove them
 #OtherPerCap has only one missing value, we want to remove the row containing that one missing value to lose less
@@ -69,7 +68,17 @@ for row in to_remove_row:               #remove row from X and Y containg NaN in
     X = X[mask]
     Y = Y[mask]
 
-#--------------
+#-------
+
+#Print percentage of NaN for columns containing NaN
+
+num_rows = len(df.index)
+num_NaN = df.isna().sum().sort_values(ascending = False)/num_rows
+print(num_NaN[num_NaN > 0])
+
+#-------
+
+
 
 
 

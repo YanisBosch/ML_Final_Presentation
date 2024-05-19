@@ -1,0 +1,7 @@
+show the percentage of missing values (to show that many values are missing)
+
+explain
+-what is listwise deletion
+-what are the usual disadvantages
+-why we still did listwise deletion
+-how we went about doing it
