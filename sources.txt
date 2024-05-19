@@ -1,2 +1,3 @@
 https://en.wikipedia.org/wiki/Listwise_deletion
 https://en.wikipedia.org/wiki/Imputation_(statistics)
+https://towardsdatascience.com/how-to-improve-the-accuracy-of-a-regression-model-3517accf8604
