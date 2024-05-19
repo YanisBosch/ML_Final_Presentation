@@ -1,0 +1,97 @@
+\documentclass{beamer}
+%\usepackage[margin=3.5cm]{geometry}
+%\usepackage[latin1]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage[english]{babel}
+%\usepackage{graphicx}
+%\usepackage{amsmath}
+%\usepackage{amsthm}
+%\usepackage{mathtools}
+%\usepackage{listings}
+%\usepackage{qtree}
+%\newtheorem{thm}{Theorem}
+%\theoremstyle{definition}
+%\newtheorem{defi}{Definition}
+%\newtheorem{nota}{Notation}
+%\theoremstyle{remark}
+%\newtheorem{rem}{Remark}
+%\theoremstyle{proposition}
+%\newtheorem{prop}{Proposition}
+%\newtheorem{lem}{Lemma}
+\setbeamertemplate{caption}[numbered]
+\usepackage{amsmath}
+\usepackage[nodayofweek,level]{datetime}
+
+\begin{document}
+	\begin{frame}
+		\title{Communities and crime}
+		\subtitle{Prediction of violent crime in the USA}
+		\author{Marie \textsc{Lontsie Zanmene} Yanis \textsc{Bosch}}
+		\maketitle
+	\end{frame}
+
+	\begin{frame}{Outline}
+		\begin{enumerate}
+			\item The dataset
+			\item Preprocessing
+			\item Regression
+			\item Performance analysis
+			\item Conclusion
+		\end{enumerate}
+	\end{frame}
+
+	\begin{frame}{The dataset}
+		\begin{itemize}
+			\item Data sources:
+				\begin{itemize}
+					\item Socio-economic data from the $1990$ US Census
+					\item Law enforcement data from the $1990$ US LEMAS survey
+					\item Crime data from the $1995$ FBI UCR
+				\end{itemize}
+			\item Creator: Michael Redmond, La Salle University, Philadelphia
+			\item Date: \formatdate{13}{7}{2009}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{The dataset}
+		\begin{itemize}
+			\item Size: $1994$ rows, $128$ columns
+			\item Example attributes: police officers per $100$K population, median rent,...
+			\item Goal: Prediction of violent crime in the USA
+		\end{itemize}		
+	\end{frame}
+
+	%INSERT GENERAL FACTS PERTAINING TO THE DATASET HERE
+	
+	\begin{frame}{Preprocessing}
+		\begin{center}
+		\resizebox{10cm}{!}{
+		\begin{tabular}{| c | c || c | c |} 
+			\hline
+	 		Column Name & Missing values(\%) & Column Name & Missing values(\%)\\ \hline
+			PolicReqPerOffic & 84.002 & PolicAveOTWorked & 84.002 \\ \hline
+			PolicPerPop & 84.002 & RacialMatchCommPol & 84.002 \\ \hline
+			PctPolicWhite & 84.002 & PctPolicBlack & 84.002 \\ \hline
+			PctPolicHisp & 84.002 & PctPolicAsian & 84.002 \\ \hline
+			PctPolicMinor & 84.002 & OfficAssgnDrugUnits & 84.002 \\ \hline
+			NumKindsDrugsSeiz & 84.002 & LemasSwFTFieldPerPop & 84.002 \\ \hline
+			LemasTotReqPerPop & 84.002 & LemasSwFTFieldOps & 84.002 \\ \hline
+			LemasSwFTPerPop & 84.002 & PolicCars & 84.002 \\ \hline
+			PolicOperBudg & 84.002 & LemasPctPolicOnPatr & 84.002 \\ \hline
+			LemasGangUnitDeploy & 84.002 & LemasSwornFT & 84.002 \\ \hline
+			PolicBudgPerPop & 84.002 & LemasTotalReq & 84.002 \\ \hline
+			OtherPerCap & 0.0502 & & \\ \hline
+		\end{tabular}}
+		
+		\end{center}
+	\end{frame}
+\end{document}
+
+
+
+
+
+
+
+
+

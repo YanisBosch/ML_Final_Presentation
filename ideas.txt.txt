@@ -1,13 +1,25 @@
 show the percentage of missing values (to show that many values are missing)
 
+0)ABOUT THE DATASET
+-general information
+-facts about the subject
+
+1)DATA CLEANING
 explain
 -what is listwise deletion
 -what are the usual disadvantages
 -why we still did listwise deletion
 -how we went about doing it
 
-model evaluation:
+2)MODEL SELECTION AND IMPLEMENTATION
+
+
+3)MODEL EVALUATION
 -accuracy
 -speed
 -generality
 -flexibility
+
+4)CONCLUSION
+-importance of data cleaning
+-what message does the model convey?
