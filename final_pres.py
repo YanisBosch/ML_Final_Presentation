@@ -21,62 +21,73 @@ def import_data():
     data.replace("?",float('NaN'),inplace = True)   #replace ? with NaN to be able to convert to float                                           
     return([data,header])
 
-temp = import_data()    #used to split grouped return from the function
-df = temp[0]
-header = temp[1]
-del(temp)
-
-#----------------------------
-
-#--------------SPLITTING DATA INTO PREDICTORS AND RESPONDERS--------------
-
-pred = header[5:-1]     #predictors are all columns except violent crime, and exluding the first five columns
-                        #which are non predictive
-resp = header[-1]
-
-for col in pred:                        
-    df[col].astype(float)               #convert values in df to float
-df[header[-1]].astype(float)
-
 #----------------------------
 
 #-------EXPLORING THE DATASET-------
 
 #First idea: See which columns contain the most missing values, if one column is almost empty we may exclude it
 
+df = import_data()[0]
+
+num_rows = len(df.index)
 num_NaN = df.isna().sum().sort_values(ascending = False)
+print("-------MISSING VALUES-------")
+print(num_NaN[num_NaN > 0])
+print("----------------------------")
 
 #Many columns are almost empty -> idea: remove them
 #OtherPerCap has only one missing value, we want to remove the row containing that one missing value to lose less
 #information
 
-to_remove_col = num_NaN[num_NaN >= 2].index.tolist()
-to_remove_row = num_NaN[num_NaN == 1].index.tolist()
+def clean_data(arr, threshold = 1):
+    df = arr[0]
+    header = arr[1]
 
-for col in to_remove_col:
-    try:
-        i = pred.index(col)             #exclude columns with many missing values
-        del pred[i]
-    except:
-        pass
+    pred = header[5:-1]     #predictors are all columns except violent crime, and exluding the first five columns
+                            #which are non predictive
+    resp = header[-1]
 
-X = df[pred]                            #create dataframe containing the predictor columns
-Y = df[resp]                            #create dataframe containing the responding column
+    header = header[5:]
+
+    for col in pred:                        
+        df[col].astype(float)               #convert values in df to float
+        df[header[-1]].astype(float)
+
+    num_NaN = df.isna().sum().sort_values(ascending = False)
+    to_remove_col = num_NaN[num_NaN > threshold].index.tolist()
+    to_remove_row = num_NaN[num_NaN == threshold].index.tolist()
+    num_NaN = df.isna().sum().sort_values(ascending = False)
+
+    for col in to_remove_col:
+        try:
+            i = pred.index(col)             #exclude columns with many missing values
+            del pred[i]
+            del header[i]
+        except:
+            pass
     
-for row in to_remove_row:               #remove row from X and Y containg NaN in the columns with only one missing value
-    mask = X[row].notna()
-    X = X[mask]
-    Y = Y[mask]
+    temp = pred + [resp]
+    df = df[temp]
+    del temp
+
+    X = df[pred]                            #create dataframe containing the predictor columns
+    Y = df[resp]                            #create dataframe containing the responding column
+    
+    for row in to_remove_row:               #remove row from X and Y containg NaN in the columns with only one missing value
+        mask = X[row].notna()
+        X = X[mask]
+        Y = Y[mask]
+    return([df,X,Y,header])
 
 #-------
 
-#Print percentage of NaN for columns containing NaN
+temp = clean_data(import_data())
+df = temp[0]
+X = temp[1]
+Y = temp[2]
+header = temp[3]
+del temp
 
-num_rows = len(df.index)
-num_NaN = df.isna().sum().sort_values(ascending = False)/num_rows
-print(num_NaN[num_NaN > 0])
-
-#-------
 
 
 

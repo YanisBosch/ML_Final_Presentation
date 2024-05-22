@@ -65,28 +65,79 @@
 	
 	\begin{frame}{Preprocessing}
 		\begin{center}
-		\resizebox{10cm}{!}{
-		\begin{tabular}{| c | c || c | c |} 
-			\hline
-	 		Column Name & Missing values(\%) & Column Name & Missing values(\%)\\ \hline
-			PolicReqPerOffic & 84.002 & PolicAveOTWorked & 84.002 \\ \hline
-			PolicPerPop & 84.002 & RacialMatchCommPol & 84.002 \\ \hline
-			PctPolicWhite & 84.002 & PctPolicBlack & 84.002 \\ \hline
-			PctPolicHisp & 84.002 & PctPolicAsian & 84.002 \\ \hline
-			PctPolicMinor & 84.002 & OfficAssgnDrugUnits & 84.002 \\ \hline
-			NumKindsDrugsSeiz & 84.002 & LemasSwFTFieldPerPop & 84.002 \\ \hline
-			LemasTotReqPerPop & 84.002 & LemasSwFTFieldOps & 84.002 \\ \hline
-			LemasSwFTPerPop & 84.002 & PolicCars & 84.002 \\ \hline
-			PolicOperBudg & 84.002 & LemasPctPolicOnPatr & 84.002 \\ \hline
-			LemasGangUnitDeploy & 84.002 & LemasSwornFT & 84.002 \\ \hline
-			PolicBudgPerPop & 84.002 & LemasTotalReq & 84.002 \\ \hline
-			OtherPerCap & 0.0502 & & \\ \hline
-		\end{tabular}}
-		
+			\begin{table}
+				\resizebox{10cm}{!}{
+					\begin{tabular}{| c | c || c | c |} 
+						\hline
+	 					Column Name & Missing values & Column Name & Missing values\\ \hline
+						PolicReqPerOffic & $1675 (84\%)$ & PolicAveOTWorked & $1675 (84\%)$ \\ \hline
+						PolicPerPop & $1675 (84\%)$ & RacialMatchCommPol & $1675 (84\%)$ \\ \hline
+						PctPolicWhite & $1675 (84\%)$ & PctPolicBlack & $1675 (84\%)$ \\ \hline
+						PctPolicHisp & $1675 (84\%)$ & PctPolicAsian & $1675 (84\%)$ \\ \hline
+						PctPolicMinor & $1675 (84\%)$ & OfficAssgnDrugUnits & $1675 (84\%)$ \\ \hline
+						NumKindsDrugsSeiz & $1675 (84\%)$ & LemasSwFTFieldPerPop & $1675 (84\%)$ \\ \hline
+						LemasTotReqPerPop & $1675 (84\%)$ & LemasSwFTFieldOps & $1675 (84\%)$ \\ \hline
+						LemasSwFTPerPop & $1675 (84\%)$ & PolicCars & $1675 (84\%)$ \\ \hline
+						PolicOperBudg & $1675 (84\%)$ & LemasPctPolicOnPatr & $1675 (84\%)$ \\ \hline
+						LemasGangUnitDeploy & $1675 (84\%)$ & LemasSwornFT & $1675 (84\%)$ \\ \hline
+						PolicBudgPerPop & $1675 (84\%)$ & LemasTotalReq & $1675 (84\%)$ \\ \hline
+						OtherPerCap & $1 (0.05\%)$ & & \\ \hline
+					\end{tabular}}
+				\caption{Total number of rows: $1994$}
+			\end{table}
 		\end{center}
 	\end{frame}
-\end{document}
 
+	\begin{frame}{Preprocessing}
+		Listwise deletion:
+		\begin{itemize}
+			\item = Method for handling missing data
+			\item Delete columns or rows that have any missing data at all
+			\item Very simple method to deal with missing data
+			\item Loss of information, and thus loss in the quality of the prediction
+			\item Good method so long as we retain sufficient power after deletion
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{Preprocessing}
+		Imputation:
+		\begin{itemize}
+			\item = Method for handling missing data
+			\item Replace missing values with substituted data
+			\item Ex: Median, Average,...
+			\item Less loss of information
+			\item May introduce bias in the correlation
+			\item Leads to lower standard errors, which may lead to Type 1 errors
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{Preprocessing}
+		Why can we use listwise deletion on the columns with $84\%$ of missing data?
+		\begin{itemize}
+			\item Most of the entries are missing, thus we don't lose too much data
+			\item We have very little data left to base our imputation on, which would make it a bad choice
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{Preprocessing}
+		How do we handle the one missing entry in the OtherPerCap column?
+		\begin{itemize}
+			\item Delete the column, but we would lose $1994$ entries
+			\item Use imputation, which should work well in this case
+			\item Delete the row, and lose one out of $1994$ rows = minimal loss of information
+		\end{itemize}
+		We deleted the row containing the missing value to keep our code as simple as we can
+	\end{frame}
+	\begin{frame}{Sources}
+		\begin{itemize}
+			\item https://en.wikipedia.org/wiki/Listwise\_deletion
+			\item https://en.wikipedia.org/wiki/Imputation\_(statistics)
+			\item https://www.theanalysisfactor.com/mean-imputation/
+			\item https://www.theanalysisfactor.com/when-listwise-deletion-works/
+			
+		\end{itemize}
+	\end{frame}
+\end{document}
 
 
 
