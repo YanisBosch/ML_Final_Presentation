@@ -34,6 +34,7 @@
 		\begin{enumerate}
 			\item The dataset
 			\item Preprocessing
+			\item Correlation analysis
 			\item Regression
 			\item Performance analysis
 			\item Conclusion
@@ -60,9 +61,20 @@
 			\item Goal: Prediction of violent crime in the USA
 		\end{itemize}		
 	\end{frame}
-
-	%INSERT GENERAL FACTS PERTAINING TO THE DATASET HERE
-	
+	\begin{frame}{The dataset}
+		\begin{itemize}
+			\item As in most countries, violent crime is driven by socio-economic factors
+			\item There seems to be a strong link between income inequality and crime
+			\item Does our data confirm this?
+			\item Which of these factors are of the highest importance?
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Preprocessing}
+		\begin{itemize}
+			\item Before studying these correlations we must make sure our data is clean
+			\item The values are already normalised, we must thus turn our attention to missing values
+		\end{itemize}
+	\end{frame}
 	\begin{frame}{Preprocessing}
 		\begin{center}
 			\begin{table}
@@ -128,13 +140,73 @@
 		\end{itemize}
 		We deleted the row containing the missing value to keep our code as simple as we can
 	\end{frame}
+	
+	\begin{frame}{Correlation analysis}
+		\begin{itemize}
+			\item Before applying a regression algorithm, it would be interesting to check which predictors are significant
+			\item Thus we plot a graph with the correlation between the predictors and violent crime
+			\item We exclude all predictors with a correlation that lies close to $0$
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Correlation analysis}
+		\begin{figure}[h]
+			\includegraphics[width=10cm]{correlation.png}
+			\centering
+		\end{figure}
+	\end{frame}
+	\begin{frame}{Correlation analysis}
+		INSERT CLOSER ANALYSIS OF SOME OF PREDICTORS WITH BEST CORRELATION (OR INVERSE CORRELATION)
+	\end{frame}
+	\begin{frame}{Regression}
+		\begin{itemize}
+			\item Given that our response variable is continuous, we have to perform regression to predict it
+			\item Idea: Use random forest regression
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Regression}
+		What is random forest regression?
+		\begin{itemize}
+			\item Based on ensemble learning
+			\begin{itemize}
+				\item = method where multiple ML algorithms are combined
+			\end{itemize}
+			\item Utilises subsets of the data to create multiple trees (= bagging)
+			\item The obtained results are averaged to create the final result
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Regression}
+		What are the advantages of random forest regression?
+		\begin{itemize}
+			\item Performs well with little to no hyperparameter tuning
+			\item Rarely overfits
+			\item Low sensitivity to noise
+			\item Good at noticing general patterns in the data
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Regression}
+		What are the disadvantages of random forest regression?
+		\begin{itemize}
+			\item Bad at extrapolation
+			\item Makes predictions only in the range of data contained in the training set
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Regression}
+		Why can we use random forest regression?
+		\begin{itemize}
+			\item Our data seems to be diverse enough to cover a realistic range of crime rates
+			\item It seems unlikely that we might have to predict a crime rate that is much higher than in our training set
+			\item We have quite a few predictors left, even after cleaning, thus overfitting could be an issue
+		\end{itemize}
+	\end{frame}
+	
 	\begin{frame}{Sources}
 		\begin{itemize}
 			\item https://en.wikipedia.org/wiki/Listwise\_deletion
 			\item https://en.wikipedia.org/wiki/Imputation\_(statistics)
 			\item https://www.theanalysisfactor.com/mean-imputation/
 			\item https://www.theanalysisfactor.com/when-listwise-deletion-works/
-			
+			\item https://cnvrg.io/random-forest-regression/
+			\item https://minds.wisconsin.edu/bitstream/handle/1793/77496/Violent\%20Crime.pdf?sequence=1
 		\end{itemize}
 	\end{frame}
 \end{document}

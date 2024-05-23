@@ -4,6 +4,8 @@ import csv
 import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn import datasets, linear_model
+import warnings
+warnings.filterwarnings('ignore')
 
 #-------IMPORTING DATA-------
 
@@ -70,6 +72,12 @@ def clean_data(arr, threshold = 1):
     df = df[temp]
     del temp
 
+    # Convert all predictor columns to float, ensuring the changes are saved
+    df[pred] = df[pred].apply(pd.to_numeric, errors='coerce')
+
+    # Convert the response column to float
+    df[resp] = pd.to_numeric(df[resp], errors='coerce')
+
     X = df[pred]                            #create dataframe containing the predictor columns
     Y = df[resp]                            #create dataframe containing the responding column
     
@@ -87,6 +95,19 @@ X = temp[1]
 Y = temp[2]
 header = temp[3]
 del temp
+
+#-------MARIE-------
+
+# Convert the Series to a 2D numpy array
+target_correlation_2d = target_correlation.values[:, None]
+
+
+#Plot the correlations with the target variable
+plt.figure(figsize=(10, 15))
+sns.heatmap(target_correlation_2d, annot=False, cmap='coolwarm', cbar=True, linewidths=0.5,
+            yticklabels=target_correlation.index)
+plt.title("Correlation with Violent Crimes per 100K Population")
+plt.show()
 
 
 
